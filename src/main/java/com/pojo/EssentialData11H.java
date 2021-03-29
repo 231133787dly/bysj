@@ -4,15 +4,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class EssentialData18H {
+public class EssentialData11H extends EssentialData{
     @Id
     private int id;
 
-    private String gpsStatus;
+    private String latitude;
+
+    private String longitude;
+
+    private int speed;
+
+    private String vehicleStatus;
 
     private String deviceSerial;
 
     private String datetime;
+
+    private int routeId;
 
     public int getId() {
         return id;
@@ -21,11 +29,32 @@ public class EssentialData18H {
         this.id = id;
     }
 
-    public String getGpsStatus(){
-        return gpsStatus;
+    public String getLatitude(){
+        return latitude;
     }
-    public void setGpsStatus(String gpsStatus){
-        this.gpsStatus = gpsStatus;
+    public void setLatitude(String latitude){
+        this.latitude = latitude;
+    }
+
+    public String getLongitude(){
+        return longitude;
+    }
+    public void setLongitude(String longitude){
+        this.longitude = longitude;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public String getVehicleStatus(){
+        return vehicleStatus;
+    }
+    public void setVehicleStatus(String vehicleStatus){
+        this.vehicleStatus = vehicleStatus;
     }
 
     public String getDeviceSerial(){
@@ -40,5 +69,12 @@ public class EssentialData18H {
     }
     public void setDatetime(String datetime){
         this.datetime = datetime;
+    }
+
+    public int getRouteId() {
+        return routeId;
+    }
+    public void setRouteId(int routeId) {
+        this.routeId = routeId;
     }
 }

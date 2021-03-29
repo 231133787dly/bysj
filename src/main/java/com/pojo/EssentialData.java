@@ -1,2 +1,6 @@
-package com.pojo;public class EssentialData {
+package com.pojo;
+
+public class EssentialData {
+
+    
 }
