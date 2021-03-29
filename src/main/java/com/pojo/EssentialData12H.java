@@ -4,11 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class EssentialData18H {
+public class EssentialData12H extends EssentialData{
     @Id
     private int id;
 
-    private String gpsStatus;
+    private String latitude;
+
+    private String longitude;
 
     private String deviceSerial;
 
@@ -21,11 +23,18 @@ public class EssentialData18H {
         this.id = id;
     }
 
-    public String getGpsStatus(){
-        return gpsStatus;
+    public String getLatitude(){
+        return latitude;
     }
-    public void setGpsStatus(String gpsStatus){
-        this.gpsStatus = gpsStatus;
+    public void setLatitude(String latitude){
+        this.latitude = latitude;
+    }
+
+    public String getLongitude(){
+        return longitude;
+    }
+    public void setLongitude(String longitude){
+        this.longitude = longitude;
     }
 
     public String getDeviceSerial(){
