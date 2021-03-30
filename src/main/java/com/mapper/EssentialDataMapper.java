@@ -40,15 +40,53 @@ public interface EssentialDataMapper {
     })
     public List<EssentialData18H> getAllEssentialData18H();
 
-    //通过设备号获取18H表中的数据
-    @Select("select * from essential_data_18h where device_serial=#{deviceSerial}")
+    //通过设备号和时间获取18H表中的数据
+    @Select("select * from essential_data_18h where device_serial=#{deviceSerial} and datetime >= #{startTime} and datetime < #{endTime}")
     @Results({
             @Result(id=true,property="id",column="id",javaType=Integer.class),
             @Result(property="gpsStatus",column="gps_status",javaType=String.class),
             @Result(property="deviceSerial",column="device_serial",javaType=String.class),
             @Result(property="datetime",column="datetime",javaType=String.class)
     })
-    public List<EssentialData18H> getEssentialData18HByDeviceSerial(@Param("deviceSerial") String deviceSerial);
+    public List<EssentialData18H> getEssentialData18HByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    //通过设备号和时间获取14H表中的数据
+    @Select("select * from essential_data_14h where device_serial=#{deviceSerial} and datetime >= #{startTime} and datetime < #{endTime}")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="latitude",column="latitude",javaType=String.class),
+            @Result(property="longitude",column="longitude",javaType=String.class),
+            @Result(property="speed",column="speed",javaType=Integer.class),
+            @Result(property="vehicleStatus",column="vehicle_status",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+            @Result(property="datetime",column="datetime",javaType=String.class)
+    })
+    public List<EssentialData14H> getEssentialData14HByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    //通过设备号和时间获取12H表中的数据
+    @Select("select * from essential_data_12h where device_serial=#{deviceSerial} and datetime >= #{startTime} and datetime < #{endTime}")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="latitude",column="latitude",javaType=String.class),
+            @Result(property="longitude",column="longitude",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+            @Result(property="datetime",column="datetime",javaType=String.class)
+    })
+    public List<EssentialData12H> getEssentialData12HByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    //通过设备号和时间获取11H表中的数据
+    @Select("select * from essential_data_11h where device_serial=#{deviceSerial} and datetime >= #{startTime} and datetime < #{endTime}")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="latitude",column="latitude",javaType=String.class),
+            @Result(property="longitude",column="longitude",javaType=String.class),
+            @Result(property="speed",column="speed",javaType=Integer.class),
+            @Result(property="vehicleStatus",column="vehicle_status",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+            @Result(property="datetime",column="datetime",javaType=String.class),
+            @Result(property="routeId",column="route_id",javaType=Integer.class)
+    })
+    public List<EssentialData11H> getEssentialData11HByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
 
     //获取所有的设备号
