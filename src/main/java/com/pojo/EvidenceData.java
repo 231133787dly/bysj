@@ -12,7 +12,7 @@ public class EvidenceData {
 
     private int actualBeats;
 
-    private int maxBeatsLackTime;
+    private long maxBeatsLackTime;
 
     private String startTime;
 
@@ -41,10 +41,10 @@ public class EvidenceData {
         this.actualBeats = actualBeats;
     }
 
-    public int getMaxBeatsLackTime() {
+    public long getMaxBeatsLackTime() {
         return maxBeatsLackTime;
     }
-    public void setMaxBeatsLackTime(int maxBeatsLackTime) {
+    public void setMaxBeatsLackTime(long maxBeatsLackTime) {
         this.maxBeatsLackTime = maxBeatsLackTime;
     }
 
