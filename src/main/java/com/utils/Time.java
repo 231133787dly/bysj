@@ -44,11 +44,13 @@ public class Time {
 
 
     //获取下一个时间段的日期
-    public static String getNextTime(String startTime){
+    public static String getNextTime(String startTime,int minutes){
         DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
         LocalDateTime nowTime = LocalDateTime.parse(startTime,formatTime);
-        nowTime = nowTime.plus(Constant.DIFFERENCE_MINUTES, ChronoUnit.MINUTES);
+        nowTime = nowTime.plus(minutes, ChronoUnit.MINUTES);
         return nowTime.format(formatTime);
     }
+
+
 
 }

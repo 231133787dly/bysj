@@ -12,6 +12,8 @@ public class EvidenceData {
 
     private int actualBeats;
 
+    private double beatsRate;
+
     private long maxBeatsLackTime;
 
     private String startTime;
@@ -39,6 +41,13 @@ public class EvidenceData {
     }
     public void setActualBeats(int actualBeats) {
         this.actualBeats = actualBeats;
+    }
+
+    public double getBeatsRate() {
+        return beatsRate;
+    }
+    public void setBeatsRate(double beatsRate) {
+        this.beatsRate = beatsRate;
     }
 
     public long getMaxBeatsLackTime() {
