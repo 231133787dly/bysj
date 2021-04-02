@@ -27,6 +27,8 @@ public class EvidenceDataService {
 
     private int beatsCount = 0;
     private long timeDifference = 0;
+    private double beatsRate = 0;
+    private double maxLackTime = 0;
     private LocalDateTime nowTime;
     private LocalDateTime preTime;
 
@@ -54,28 +56,44 @@ public class EvidenceDataService {
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
         List<EssentialData18H> essentialData18HList = essentialDataMapper.getEssentialData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
-        //统计心跳
-        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
-        preTime = LocalDateTime.parse(essentialData18HList.get(0).getDatetime(),formatTime);
-        beatsCount = 0;
-        timeDifference = 0;
-        for(EssentialData18H essentialData18H : essentialData18HList){
-            //判断最大缺省时间
-            nowTime = LocalDateTime.parse(essentialData18H.getDatetime(),formatTime);
-            Duration duration = Duration.between(preTime,nowTime);
+        if(!essentialData18HList.isEmpty()) {
+            //统计心跳
+            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
+            preTime = LocalDateTime.parse(startTime, formatTime);
+            beatsCount = 0;
+            timeDifference = 0;
+            for (EssentialData18H essentialData18H : essentialData18HList) {
+                //判断最大缺省时间
+                nowTime = LocalDateTime.parse(essentialData18H.getDatetime(), formatTime);
+                Duration duration = Duration.between(preTime, nowTime);
+                if (timeDifference < duration.toSeconds()) {
+                    timeDifference = duration.toSeconds();
+                }
+                preTime = nowTime;
+                beatsCount++;
+            }
+            //附加时间判断，判断最后的缺失时长
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
             }
-            preTime = nowTime;
-            beatsCount ++ ;
+
+            beatsRate = (double) beatsCount / Constant.EstimatedBeats_18H;
+            maxLackTime = ((double) timeDifference / Constant.EstimatedTime_18H -1) / Constant.EstimatedBeats_18H;
+            //设置分析结果
+            evidenceData.setActualBeats(beatsCount);
+            evidenceData.setBeatsRate(beatsRate);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(maxLackTime);
+        }else {
+            evidenceData.setActualBeats(0);
+            evidenceData.setBeatsRate(0);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(1);
         }
-        double beatsRate = (double)beatsCount / Constant.EstimatedBeats_18H;
-        //设置分析结果
-        evidenceData.setActualBeats(beatsCount);
-        evidenceData.setBeatsRate(beatsRate);
-        evidenceData.setDeviceSerial(deviceSerial);
-        evidenceData.setStartTime(startTime);
-        evidenceData.setMaxBeatsLackTime(timeDifference);
         //写入数据库中
         evidenceDataMapper.addEvidenceData18H(evidenceData);
     }
@@ -85,28 +103,46 @@ public class EvidenceDataService {
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
         List<EssentialData14H> essentialData14HList = essentialDataMapper.getEssentialData14HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
-        //统计心跳
-        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
-        preTime = LocalDateTime.parse(essentialData14HList.get(0).getDatetime(),formatTime);
-        beatsCount = 0;
-        timeDifference = 0;
-        for(EssentialData14H essentialData14H : essentialData14HList){
-            //判断最大缺省时间
-            nowTime = LocalDateTime.parse(essentialData14H.getDatetime(),formatTime);
-            Duration duration = Duration.between(preTime,nowTime);
+        if(!essentialData14HList.isEmpty()) {
+            //统计心跳
+            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
+            //preTime = LocalDateTime.parse(essentialData14HList.get(0).getDatetime(), formatTime);
+            preTime = LocalDateTime.parse(startTime, formatTime);
+            beatsCount = 0;
+            timeDifference = 0;
+            for (EssentialData14H essentialData14H : essentialData14HList) {
+                //判断最大缺省时间
+                nowTime = LocalDateTime.parse(essentialData14H.getDatetime(), formatTime);
+                Duration duration = Duration.between(preTime, nowTime);
+                if (timeDifference < duration.toSeconds()) {
+                    timeDifference = duration.toSeconds();
+                }
+
+                preTime = nowTime;
+                beatsCount++;
+            }
+            //附加时间判断，判断最后的缺失时长
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
             }
-            preTime = nowTime;
-            beatsCount ++ ;
+
+            beatsRate = (double) beatsCount / Constant.EstimatedBeats_14H;
+            maxLackTime = ((double) timeDifference / Constant.EstimatedTime_14H -1) / Constant.EstimatedBeats_14H;
+            //设置分析结果
+            evidenceData.setActualBeats(beatsCount);
+            evidenceData.setBeatsRate(beatsRate);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(maxLackTime);
+        }else {
+            evidenceData.setActualBeats(0);
+            evidenceData.setBeatsRate(0);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(1);
         }
-        double beatsRate = (double)beatsCount / Constant.EstimatedBeats_14H;
-        //设置分析结果
-        evidenceData.setActualBeats(beatsCount);
-        evidenceData.setBeatsRate(beatsRate);
-        evidenceData.setDeviceSerial(deviceSerial);
-        evidenceData.setStartTime(startTime);
-        evidenceData.setMaxBeatsLackTime(timeDifference);
         //写入数据库中
         evidenceDataMapper.addEvidenceData14H(evidenceData);
     }
@@ -116,28 +152,44 @@ public class EvidenceDataService {
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
         List<EssentialData12H> essentialData12HList = essentialDataMapper.getEssentialData12HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
-        //统计心跳
-        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
-        preTime = LocalDateTime.parse(essentialData12HList.get(0).getDatetime(),formatTime);
-        beatsCount = 0;
-        timeDifference = 0;
-        for(EssentialData12H essentialData12H : essentialData12HList){
-            //判断最大缺省时间
-            nowTime = LocalDateTime.parse(essentialData12H.getDatetime(),formatTime);
-            Duration duration = Duration.between(preTime,nowTime);
+        if(!essentialData12HList.isEmpty()) {
+            //统计心跳
+            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
+            preTime = LocalDateTime.parse(startTime, formatTime);
+            beatsCount = 0;
+            timeDifference = 0;
+            for (EssentialData12H essentialData12H : essentialData12HList) {
+                //判断最大缺省时间
+                nowTime = LocalDateTime.parse(essentialData12H.getDatetime(), formatTime);
+                Duration duration = Duration.between(preTime, nowTime);
+                if (timeDifference < duration.toSeconds()) {
+                    timeDifference = duration.toSeconds();
+                }
+                preTime = nowTime;
+                beatsCount++;
+            }
+            //附加时间判断，判断最后的缺失时长
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
             }
-            preTime = nowTime;
-            beatsCount ++ ;
+
+            beatsRate = (double) beatsCount / Constant.EstimatedBeats_12H;
+            maxLackTime = ((double) timeDifference / Constant.EstimatedTime_12H -1) / Constant.EstimatedBeats_12H;
+            //设置分析结果
+            evidenceData.setActualBeats(beatsCount);
+            evidenceData.setBeatsRate(beatsRate);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(maxLackTime);
+        }else {
+            evidenceData.setActualBeats(0);
+            evidenceData.setBeatsRate(0);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(1);
         }
-        double beatsRate = (double)beatsCount / Constant.EstimatedBeats_12H;
-        //设置分析结果
-        evidenceData.setActualBeats(beatsCount);
-        evidenceData.setBeatsRate(beatsRate);
-        evidenceData.setDeviceSerial(deviceSerial);
-        evidenceData.setStartTime(startTime);
-        evidenceData.setMaxBeatsLackTime(timeDifference);
         //写入数据库中
         evidenceDataMapper.addEvidenceData12H(evidenceData);
     }
@@ -147,28 +199,44 @@ public class EvidenceDataService {
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
         List<EssentialData11H> essentialData11HList = essentialDataMapper.getEssentialData11HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
-        //统计心跳
-        DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
-        preTime = LocalDateTime.parse(essentialData11HList.get(0).getDatetime(),formatTime);
-        beatsCount = 0;
-        timeDifference = 0;
-        for(EssentialData11H essentialData11H : essentialData11HList){
-            //判断最大缺省时间
-            nowTime = LocalDateTime.parse(essentialData11H.getDatetime(),formatTime);
-            Duration duration = Duration.between(preTime,nowTime);
+        if(!essentialData11HList.isEmpty()) {
+            //统计心跳
+            DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
+            preTime = LocalDateTime.parse(startTime, formatTime);
+            beatsCount = 0;
+            timeDifference = 0;
+            for (EssentialData11H essentialData11H : essentialData11HList) {
+                //判断最大缺省时间
+                nowTime = LocalDateTime.parse(essentialData11H.getDatetime(), formatTime);
+                Duration duration = Duration.between(preTime, nowTime);
+                if (timeDifference < duration.toSeconds()) {
+                    timeDifference = duration.toSeconds();
+                }
+                preTime = nowTime;
+                beatsCount++;
+            }
+            //附加时间判断，判断最后的缺失时长
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
             }
-            preTime = nowTime;
-            beatsCount ++ ;
+
+            beatsRate = (double) beatsCount / Constant.EstimatedBeats_11H;
+            maxLackTime = ((double) timeDifference / Constant.EstimatedTime_11H -1) / Constant.EstimatedBeats_11H;
+            //设置分析结果
+            evidenceData.setActualBeats(beatsCount);
+            evidenceData.setBeatsRate(beatsRate);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(maxLackTime);
+        }else {
+            evidenceData.setActualBeats(0);
+            evidenceData.setBeatsRate(0);
+            evidenceData.setDeviceSerial(deviceSerial);
+            evidenceData.setStartTime(startTime);
+            evidenceData.setMaxBeatsLackTime(1);
         }
-        double beatsRate = (double)beatsCount / Constant.EstimatedBeats_11H;
-        //设置分析结果
-        evidenceData.setActualBeats(beatsCount);
-        evidenceData.setBeatsRate(beatsRate);
-        evidenceData.setDeviceSerial(deviceSerial);
-        evidenceData.setStartTime(startTime);
-        evidenceData.setMaxBeatsLackTime(timeDifference);
         //写入数据库中
         evidenceDataMapper.addEvidenceData11H(evidenceData);
     }
