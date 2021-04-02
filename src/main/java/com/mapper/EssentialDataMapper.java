@@ -88,8 +88,4 @@ public interface EssentialDataMapper {
     })
     public List<EssentialData11H> getEssentialData11HByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
-
-    //获取所有的设备号
-    @Select("select device_serial from device_serial_list")
-    public List<String> getAllDeviceSerial();
 }
