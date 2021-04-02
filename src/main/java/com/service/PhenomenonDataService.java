@@ -1,12 +1,13 @@
 package com.service;
 
 import com.constant.Constant;
-import com.mapper.EssentialDataMapper;
+
 import com.mapper.EvidenceDataMapper;
 import com.mapper.PhenomenonDataMapper;
 import com.mapper.RulesMapper;
 import com.pojo.EssentialData18H;
 import com.pojo.EvidenceData;
+import com.pojo.PhenomenonData;
 import com.utils.Time;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,20 @@ public class PhenomenonDataService {
 
     //将18H证据库的数据分析得出现象
     private void analysePhenomenonData18H(String deviceSerial, String startTime){
-        //evidenceDataMapper.get
+        PhenomenonData phenomenonData = new PhenomenonData();
+        //心跳率
+        double beatsRate;
+        //最大缺失时间
+        double maxBeatsLackTime;
+        //获取数据
+        List<EvidenceData> evidenceDataList = evidenceDataMapper.getEvidenceData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
+        for(EvidenceData evidenceData : evidenceDataList){
+            beatsRate = evidenceData.getBeatsRate();
+            maxBeatsLackTime = evidenceData.getMaxBeatsLackTime();
+
+
+        }
+
     }
 
 }

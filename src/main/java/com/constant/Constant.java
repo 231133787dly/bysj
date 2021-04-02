@@ -55,4 +55,16 @@ public final class Constant {
 
     /****** 11H默认应有心跳数 ******/
     public static final int EstimatedBeats_11H = 4;
+
+    /****** 18H单次时间差 ******/
+    public static final int EstimatedTime_18H = 300;
+
+    /****** 14H单次时间差 ******/
+    public static final int EstimatedTime_14H = 10;
+
+    /****** 12H单次时间差 ******/
+    public static final int EstimatedTime_12H = 30;
+
+    /****** 11H单次时间差 ******/
+    public static final int EstimatedTime_11H = 300;
 }
