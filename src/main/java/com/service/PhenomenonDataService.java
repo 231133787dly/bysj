@@ -5,6 +5,7 @@ import com.constant.Constant;
 import com.mapper.EvidenceDataMapper;
 import com.mapper.PhenomenonDataMapper;
 import com.mapper.RulesMapper;
+import com.pojo.BeatsPhenomenon;
 import com.pojo.EssentialData18H;
 import com.pojo.EvidenceData;
 import com.pojo.PhenomenonData;
@@ -50,15 +51,37 @@ public class PhenomenonDataService {
         double beatsRate;
         //最大缺失时间
         double maxBeatsLackTime;
+        //现象编号
+        int phenomenonId;
         //获取数据
         List<EvidenceData> evidenceDataList = evidenceDataMapper.getEvidenceData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
-        for(EvidenceData evidenceData : evidenceDataList){
-            beatsRate = evidenceData.getBeatsRate();
-            maxBeatsLackTime = evidenceData.getMaxBeatsLackTime();
-
-
+        //获取现象规则库
+        List<BeatsPhenomenon> beatsPhenomenaList = rulesMapper.getAllBeatsPhenomenon();
+        //循环判断每类现象是否出现
+        for (BeatsPhenomenon beatsPhenomenon : beatsPhenomenaList){
+            phenomenonId = beatsPhenomenon.getPhenomenonId();
+            //当前时间段内同一类现象出现的阈值
+            int threshold = 0;
+            for(EvidenceData evidenceData : evidenceDataList){
+                beatsRate = evidenceData.getBeatsRate();
+                maxBeatsLackTime = evidenceData.getMaxBeatsLackTime();
+                if (beatsRate <= beatsPhenomenon.getBeatsRateMax() && beatsRate > beatsPhenomenon.getBeatsRateMin()
+                    && maxBeatsLackTime < beatsPhenomenon.getLackTimeMax() && maxBeatsLackTime > beatsPhenomenon.getLackTimeMin()){
+                    threshold ++;
+                }
+            }
+            //如果出现现象
+            if (threshold != 0){
+                phenomenonData.setPhenomenonId(phenomenonId);
+                phenomenonData.setStartTime(startTime);
+                phenomenonData.setDeviceSerial(deviceSerial);
+                phenomenonData.setEvidenceNum(1);
+                phenomenonData.setEvidenceFrom(Constant.Type_18H);
+                phenomenonData.setPhenomenonThreshold(threshold);
+                //写入现象
+                phenomenonDataMapper.addPhenomenonData(phenomenonData);
+            }
         }
-
     }
 
 }
