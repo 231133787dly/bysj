@@ -1,5 +1,6 @@
 package com.mapper;
 
+import com.pojo.BeatsFault;
 import com.pojo.BeatsPhenomenon;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -25,4 +26,15 @@ public interface RulesMapper {
             @Result(property="lackTimeMin",column="lack_time_min",javaType=Double.class),
     })
     public List<BeatsPhenomenon> getAllBeatsPhenomenon();
+
+    //获取所有的心跳故障规则
+    @Select("select * from beats_fault_rule")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="faultId",column="fault_id",javaType=Integer.class),
+            @Result(property="needPhenomenonId",column="need_phenomenon_id",javaType=Integer.class),
+            @Result(property="needPhenomenonNum",column="need_phenomenon_num",javaType=Integer.class),
+            @Result(property="needPhenomenonThreshold",column="need_phenomenon_threshold",javaType=Integer.class),
+    })
+    public List<BeatsFault> getAllBeatsFault();
 }
