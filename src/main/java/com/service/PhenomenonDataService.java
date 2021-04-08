@@ -33,7 +33,7 @@ public class PhenomenonDataService {
         //循环分析各个设备
         for (String deviceSerial : deviceSerialList) {
             //循环分析各个证据库
-            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime, 60)) {
+            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime, Constant.DIFFERENCE_PHENOMENON_MINUTES)) {
                 //对某一设备某一时间段进行数据分析
                 this.analysePhenomenonData(deviceSerial, dataTime, Constant.Type_18H);
                 this.analysePhenomenonData(deviceSerial, dataTime, Constant.Type_14H);
@@ -56,22 +56,22 @@ public class PhenomenonDataService {
         List<EvidenceData> evidenceDataList = null;
         switch (type){
             case Constant.Type_18H :
-                evidenceDataList = evidenceDataMapper.getEvidenceData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
+                evidenceDataList = evidenceDataMapper.getEvidenceData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_PHENOMENON_MINUTES));
                 phenomenonData.setEvidenceFrom(Constant.Type_18H);
                 phenomenonData.setEvidenceNum(1);
                 break;
             case Constant.Type_14H :
-                evidenceDataList = evidenceDataMapper.getEvidenceData14HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
+                evidenceDataList = evidenceDataMapper.getEvidenceData14HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_PHENOMENON_MINUTES));
                 phenomenonData.setEvidenceFrom(Constant.Type_14H);
                 phenomenonData.setEvidenceNum(1);
                 break;
             case Constant.Type_12H :
-                evidenceDataList = evidenceDataMapper.getEvidenceData12HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
+                evidenceDataList = evidenceDataMapper.getEvidenceData12HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_PHENOMENON_MINUTES));
                 phenomenonData.setEvidenceFrom(Constant.Type_12H);
                 phenomenonData.setEvidenceNum(1);
                 break;
             case Constant.Type_11H :
-                evidenceDataList = evidenceDataMapper.getEvidenceData11HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
+                evidenceDataList = evidenceDataMapper.getEvidenceData11HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_PHENOMENON_MINUTES));
                 phenomenonData.setEvidenceFrom(Constant.Type_11H);
                 phenomenonData.setEvidenceNum(1);
                 break;
@@ -118,7 +118,7 @@ public class PhenomenonDataService {
         //现象编号
         int phenomenonId;
         //获取数据
-        List<EvidenceData> evidenceDataList = evidenceDataMapper.getEvidenceData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,60));
+        List<EvidenceData> evidenceDataList = evidenceDataMapper.getEvidenceData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_PHENOMENON_MINUTES));
         //获取现象规则库
         List<BeatsPhenomenon> beatsPhenomenaList = rulesMapper.getAllBeatsPhenomenon();
         //循环判断每类现象是否出现

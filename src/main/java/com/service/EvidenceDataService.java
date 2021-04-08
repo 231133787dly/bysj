@@ -38,7 +38,7 @@ public class EvidenceDataService {
         List<String> deviceSerialList= rulesMapper.getAllDeviceSerial();
         //循环分析各个设备
         for (String deviceSerial : deviceSerialList){
-            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime,20)){
+            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime,Constant.DIFFERENCE_MINUTES)){
                 //对某一设备某一时间段进行数据分析
                 this.analyseEvidenceData18H(deviceSerial,dataTime);
                 this.analyseEvidenceData14H(deviceSerial,dataTime);
@@ -55,7 +55,7 @@ public class EvidenceDataService {
     private void analyseEvidenceData18H(String deviceSerial, String startTime){
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
-        List<EssentialData18H> essentialData18HList = essentialDataMapper.getEssentialData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
+        List<EssentialData18H> essentialData18HList = essentialDataMapper.getEssentialData18HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES));
         if(!essentialData18HList.isEmpty()) {
             //统计心跳
             DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
@@ -73,7 +73,7 @@ public class EvidenceDataService {
                 beatsCount++;
             }
             //附加时间判断，判断最后的缺失时长
-            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES), formatTime);
             Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
@@ -102,7 +102,7 @@ public class EvidenceDataService {
     private void analyseEvidenceData14H(String deviceSerial, String startTime){
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
-        List<EssentialData14H> essentialData14HList = essentialDataMapper.getEssentialData14HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
+        List<EssentialData14H> essentialData14HList = essentialDataMapper.getEssentialData14HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES));
         if(!essentialData14HList.isEmpty()) {
             //统计心跳
             DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
@@ -122,7 +122,7 @@ public class EvidenceDataService {
                 beatsCount++;
             }
             //附加时间判断，判断最后的缺失时长
-            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES), formatTime);
             Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
@@ -151,7 +151,7 @@ public class EvidenceDataService {
     private void analyseEvidenceData12H(String deviceSerial, String startTime){
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
-        List<EssentialData12H> essentialData12HList = essentialDataMapper.getEssentialData12HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
+        List<EssentialData12H> essentialData12HList = essentialDataMapper.getEssentialData12HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES));
         if(!essentialData12HList.isEmpty()) {
             //统计心跳
             DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
@@ -169,7 +169,7 @@ public class EvidenceDataService {
                 beatsCount++;
             }
             //附加时间判断，判断最后的缺失时长
-            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES), formatTime);
             Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();
@@ -198,7 +198,7 @@ public class EvidenceDataService {
     private void analyseEvidenceData11H(String deviceSerial, String startTime){
         EvidenceData evidenceData = new EvidenceData();
         //获取所需数据
-        List<EssentialData11H> essentialData11HList = essentialDataMapper.getEssentialData11HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,20));
+        List<EssentialData11H> essentialData11HList = essentialDataMapper.getEssentialData11HByDAT(deviceSerial,startTime,Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES));
         if(!essentialData11HList.isEmpty()) {
             //统计心跳
             DateTimeFormatter formatTime = DateTimeFormatter.ofPattern(Constant.FORMAT_TIME);
@@ -216,7 +216,7 @@ public class EvidenceDataService {
                 beatsCount++;
             }
             //附加时间判断，判断最后的缺失时长
-            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,20), formatTime);
+            nowTime = LocalDateTime.parse(Time.getNextTime(startTime,Constant.DIFFERENCE_MINUTES), formatTime);
             Duration duration = Duration.between(preTime, nowTime);
             if (timeDifference < duration.toSeconds()) {
                 timeDifference = duration.toSeconds();

@@ -32,11 +32,17 @@ public final class Constant {
     /****** 规定的每日统计开始时间 ******/
     public static final String START_TIME = " 08:00:00";
 
-    /****** 规定的统计时间差 ******/
-    public static final int DIFFERENCE_MINUTES = 20;
-
     /****** 规定的每日统计结束时间 ******/
     public static final String END_TIME = " 10:00:00";
+
+    /****** 规定的证据统计时间差 ******/
+    public static final int DIFFERENCE_MINUTES = 20;
+
+    /****** 规定的现象统计时间差 ******/
+    public static final int DIFFERENCE_PHENOMENON_MINUTES = 60;
+
+    /****** 规定的故障统计时间差 ******/
+    public static final int DIFFERENCE_FAULT_MINUTES = 120;
 
     /****** 日期格式 ******/
     public static final String FORMAT_DATE = "yyyy-MM-dd";
