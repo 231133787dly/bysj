@@ -147,4 +147,8 @@ public class PhenomenonDataService {
             }
         }
     }
+
+    public List<PhenomenonData> getPhenomenonData() {
+        return phenomenonDataMapper.getPhenomenonData();
+    }
 }

@@ -46,9 +46,6 @@ public class EvidenceDataService {
                 this.analyseEvidenceData11H(deviceSerial,dataTime);
             }
         }
-
-
-
     }
 
     //对18H某一设备某一时间段进行数据分析
@@ -241,4 +238,69 @@ public class EvidenceDataService {
         evidenceDataMapper.addEvidenceData11H(evidenceData);
     }
 
+    //获取11H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate11H(){
+        return evidenceDataMapper.getEvidenceData11H();
+    }
+    //获取12H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate12H(){
+        return evidenceDataMapper.getEvidenceData12H();
+    }
+    //获取14H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate14H(){
+        return evidenceDataMapper.getEvidenceData14H();
+    }
+    //获取18H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate18H(){
+        return evidenceDataMapper.getEvidenceData18H();
+    }
+
+    //插入11H证据库
+    public void addEvidenceData11H(){
+        //获取所有的设备列表
+        List<String> deviceSerialList= rulesMapper.getAllDeviceSerial();
+        //循环分析各个设备
+        for (String deviceSerial : deviceSerialList){
+            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime,Constant.DIFFERENCE_MINUTES)){
+                //对某一设备某一时间段进行数据分析
+                this.analyseEvidenceData11H(deviceSerial,dataTime);
+            }
+        }
+    }
+    //插入12H证据库
+    public void addEvidenceData12H(){
+        //获取所有的设备列表
+        List<String> deviceSerialList= rulesMapper.getAllDeviceSerial();
+        //循环分析各个设备
+        for (String deviceSerial : deviceSerialList){
+            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime,Constant.DIFFERENCE_MINUTES)){
+                //对某一设备某一时间段进行数据分析
+                this.analyseEvidenceData12H(deviceSerial,dataTime);
+            }
+        }
+    }
+    //插入14H证据库
+    public void addEvidenceData14H(){
+        //获取所有的设备列表
+        List<String> deviceSerialList= rulesMapper.getAllDeviceSerial();
+        //循环分析各个设备
+        for (String deviceSerial : deviceSerialList){
+            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime,Constant.DIFFERENCE_MINUTES)){
+                //对某一设备某一时间段进行数据分析
+                this.analyseEvidenceData14H(deviceSerial,dataTime);
+            }
+        }
+    }
+    //插入18H证据库
+    public void addEvidenceData18H(){
+        //获取所有的设备列表
+        List<String> deviceSerialList= rulesMapper.getAllDeviceSerial();
+        //循环分析各个设备
+        for (String deviceSerial : deviceSerialList){
+            for (String dataTime = Time.getStartTime(); !dataTime.equals(Time.getEndTime()); dataTime = Time.getNextTime(dataTime,Constant.DIFFERENCE_MINUTES)){
+                //对某一设备某一时间段进行数据分析
+                this.analyseEvidenceData18H(deviceSerial,dataTime);
+            }
+        }
+    }
 }

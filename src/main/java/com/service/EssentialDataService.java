@@ -44,4 +44,19 @@ public class EssentialDataService {
                     break;
             }
     }
+
+    public List<? extends EssentialData> getEssentialData(String type){
+        switch (type){
+            case Constant.Type_18H :
+                return essentialDataMapper.getAllEssentialData18H();
+            case Constant.Type_14H :
+                return essentialDataMapper.getAllEssentialData14H();
+            case Constant.Type_12H :
+                return essentialDataMapper.getAllEssentialData12H();
+            case Constant.Type_11H :
+                return essentialDataMapper.getAllEssentialData11H();
+            default:
+                return null;
+        }
+    }
 }

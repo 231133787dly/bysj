@@ -78,4 +78,60 @@ public class FaultDataService {
         }
     }
 
+    public List<FaultData> getFaultData() {
+        return faultDataMapper.getFaultData();
+    }
+
+    public void deleteAll(){
+        rulesMapper.deleteEssentialData11H();
+        rulesMapper.deleteEssentialData12H();
+        rulesMapper.deleteEssentialData14H();
+        rulesMapper.deleteEssentialData18H();
+        rulesMapper.deleteEvidenceData11H();
+        rulesMapper.deleteEvidenceData12H();
+        rulesMapper.deleteEvidenceData14H();
+        rulesMapper.deleteEvidenceData18H();
+        rulesMapper.deletePhenomenonData();
+        rulesMapper.deleteFaultData();
+    }
+
+    public void deleteEssentialData11H(){
+       rulesMapper.deleteEssentialData11H();
+    }
+
+    public void deleteEssentialData12H(){
+        rulesMapper.deleteEssentialData12H();
+    }
+
+    public void deleteEssentialData14H(){
+        rulesMapper.deleteEssentialData14H();
+    }
+
+    public void deleteEssentialData18H(){
+        rulesMapper.deleteEssentialData18H();
+    }
+
+    public void deleteEvidenceData18H(){
+        rulesMapper.deleteEvidenceData18H();
+    }
+
+    public void deleteEvidenceData14H(){
+        rulesMapper.deleteEvidenceData14H();
+    }
+
+    public void deleteEvidenceData12H(){
+        rulesMapper.deleteEvidenceData12H();
+    }
+
+    public void deleteEvidenceData11H(){
+        rulesMapper.deleteEvidenceData11H();
+    }
+
+    public void deletePhenomenonData(){
+        rulesMapper.deletePhenomenonData();
+    }
+
+    public void deleteFaultData(){
+        rulesMapper.deleteFaultData();
+    }
 }

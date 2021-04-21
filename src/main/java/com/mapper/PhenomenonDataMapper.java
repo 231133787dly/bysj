@@ -27,5 +27,17 @@ public interface PhenomenonDataMapper {
     })
     public List<PhenomenonData> getPhenomenonDataByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
+    //获取现象表中的数据
+    @Select("select * from phenomenon_data")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="phenomenonId",column="phenomenon_id",javaType=Integer.class),
+            @Result(property="startTime",column="start_time",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+            @Result(property="evidenceNum",column="evidence_num",javaType=Integer.class),
+            @Result(property="evidenceFrom",column="evidence_from",javaType=String.class),
+            @Result(property="phenomenonThreshold",column="phenomenon_threshold",javaType=Integer.class)
+    })
+    public List<PhenomenonData> getPhenomenonData();
 }
 
