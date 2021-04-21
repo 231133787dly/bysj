@@ -83,5 +83,4 @@ public class EssentialDataController {
         log.info("获取到的值："+essentialDataService.getEssentialData(Constant.Type_11H));
         return (List<EssentialData11H>) essentialDataService.getEssentialData(Constant.Type_11H);
     }
-
 }

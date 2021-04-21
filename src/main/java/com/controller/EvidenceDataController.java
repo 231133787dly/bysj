@@ -5,6 +5,7 @@ import com.service.EvidenceDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,26 @@ public class EvidenceDataController {
     @RequestMapping(value = "/addEvidenceData")
     public void addEvidenceData(){
         evidenceDataService.addEvidenceData();
+    }
+
+    @RequestMapping(value = "/addEvidenceData/11H")
+    public void addEvidenceData11H(){
+        evidenceDataService.addEvidenceData11H();
+    }
+
+    @RequestMapping(value = "/addEvidenceData/12H")
+    public void addEvidenceData12H(){
+        evidenceDataService.addEvidenceData12H();
+    }
+
+    @RequestMapping(value = "/addEvidenceData/14H")
+    public void addEvidenceData14H(){
+        evidenceDataService.addEvidenceData14H();
+    }
+
+    @RequestMapping(value = "/addEvidenceData/18H")
+    public void addEvidenceData18H(){
+        evidenceDataService.addEvidenceData18H();
     }
 
     @RequestMapping(value = "/11H")

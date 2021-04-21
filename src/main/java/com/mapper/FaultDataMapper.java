@@ -18,4 +18,15 @@ public interface FaultDataMapper {
     //通过故障id、设备号和时间获取故障
     @Select("select COUNT(*) from fault_data where fault_id =#{faultId} and device_serial=#{deviceSerial} and start_time >= #{startTime} and start_time < #{endTime}")
     public int hasFault(@Param("faultId") int faultId,@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    //通过故障id、设备号和时间获取故障
+    @Select("select * from fault_data")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="faultId",column="fault_id",javaType=Integer.class),
+            @Result(property="startTime",column="start_time",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+            @Result(property="faultCount",column="fault_count",javaType=Integer.class),
+    })
+    public List<FaultData> getFaultData();
 }

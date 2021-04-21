@@ -2,10 +2,7 @@ package com.mapper;
 
 import com.pojo.BeatsFault;
 import com.pojo.BeatsPhenomenon;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -37,4 +34,44 @@ public interface RulesMapper {
             @Result(property="needPhenomenonThreshold",column="need_phenomenon_threshold",javaType=Integer.class),
     })
     public List<BeatsFault> getAllBeatsFault();
+
+    //删除11H基础数据
+    @Delete("Delete from essential_data_11h where 1=1")
+    public void deleteEssentialData11H();
+
+    //删除12H基础数据
+    @Delete("Delete from essential_data_12h where 1=1")
+    public void deleteEssentialData12H();
+
+    //删除14H基础数据
+    @Delete("Delete from essential_data_14h where 1=1")
+    public void deleteEssentialData14H();
+
+    //删除18H基础数据
+    @Delete("Delete from essential_data_18h where 1=1")
+    public void deleteEssentialData18H();
+
+    //删除11H证据
+    @Delete("Delete from evidence_data_11h where 1=1")
+    public void deleteEvidenceData11H();
+
+    //删除12H证据
+    @Delete("Delete from evidence_data_12h where 1=1")
+    public void deleteEvidenceData12H();
+
+    //删除14H证据
+    @Delete("Delete from evidence_data_14h where 1=1")
+    public void deleteEvidenceData14H();
+
+    //删除18H证据
+    @Delete("Delete from evidence_data_18h where 1=1")
+    public void deleteEvidenceData18H();
+
+    //删除现象
+    @Delete("Delete from phenomenon_data where 1=1")
+    public void deletePhenomenonData();
+
+    //删除故障
+    @Delete("Delete from fault_data where 1=1")
+    public void deleteFaultData();
 }
