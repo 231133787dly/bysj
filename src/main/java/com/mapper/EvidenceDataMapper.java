@@ -77,4 +77,55 @@ public interface EvidenceDataMapper {
     })
     public List<EvidenceData> getEvidenceData11HByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
+    //获取11H证据表中的数据
+    @Select("select * from evidence_data_11h")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="estimatedBeats",column="estimated_beats",javaType=Integer.class),
+            @Result(property="actualBeats",column="actual_beats",javaType=Integer.class),
+            @Result(property="beatsRate",column="beats_rate",javaType=Double.class),
+            @Result(property="maxBeatsLackTime",column="max_beats_lack_time",javaType=Double.class),
+            @Result(property="startTime",column="start_time",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+    })
+    public List<EvidenceData> getEvidenceData11H();
+
+    //获取12H证据表中的数据
+    @Select("select * from evidence_data_12h")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="estimatedBeats",column="estimated_beats",javaType=Integer.class),
+            @Result(property="actualBeats",column="actual_beats",javaType=Integer.class),
+            @Result(property="beatsRate",column="beats_rate",javaType=Double.class),
+            @Result(property="maxBeatsLackTime",column="max_beats_lack_time",javaType=Double.class),
+            @Result(property="startTime",column="start_time",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+    })
+    public List<EvidenceData> getEvidenceData12H();
+
+    //获取14H证据表中的数据
+    @Select("select * from evidence_data_14h")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="estimatedBeats",column="estimated_beats",javaType=Integer.class),
+            @Result(property="actualBeats",column="actual_beats",javaType=Integer.class),
+            @Result(property="beatsRate",column="beats_rate",javaType=Double.class),
+            @Result(property="maxBeatsLackTime",column="max_beats_lack_time",javaType=Double.class),
+            @Result(property="startTime",column="start_time",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+    })
+    public List<EvidenceData> getEvidenceData14H();
+
+    //获取18H证据表中的数据
+    @Select("select * from evidence_data_18h")
+    @Results({
+            @Result(id=true,property="id",column="id",javaType=Integer.class),
+            @Result(property="estimatedBeats",column="estimated_beats",javaType=Integer.class),
+            @Result(property="actualBeats",column="actual_beats",javaType=Integer.class),
+            @Result(property="beatsRate",column="beats_rate",javaType=Double.class),
+            @Result(property="maxBeatsLackTime",column="max_beats_lack_time",javaType=Double.class),
+            @Result(property="startTime",column="start_time",javaType=String.class),
+            @Result(property="deviceSerial",column="device_serial",javaType=String.class),
+    })
+    public List<EvidenceData> getEvidenceData18H();
 }

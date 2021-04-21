@@ -241,4 +241,20 @@ public class EvidenceDataService {
         evidenceDataMapper.addEvidenceData11H(evidenceData);
     }
 
+    //获取11H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate11H(){
+        return evidenceDataMapper.getEvidenceData11H();
+    }
+    //获取12H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate12H(){
+        return evidenceDataMapper.getEvidenceData12H();
+    }
+    //获取14H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate14H(){
+        return evidenceDataMapper.getEvidenceData14H();
+    }
+    //获取18H证据库中的证据信息
+    public List<EvidenceData> getEvidenceDate18H(){
+        return evidenceDataMapper.getEvidenceData18H();
+    }
 }
