@@ -24,6 +24,15 @@ public class EssentialDataController {
     @Autowired
     EssentialDataService essentialDataService;
 
+    //插入基础数据
+    @RequestMapping(value = "/all")
+    public void addEssentialData() throws IOException {
+        essentialDataService.insertEssentialData(Excel.csvReadOperation(Constant.EssentialData18H_PATH,Constant.Type_18H),Constant.Type_18H);
+        essentialDataService.insertEssentialData(Excel.csvReadOperation(Constant.EssentialData14H_PATH,Constant.Type_14H),Constant.Type_14H);
+        essentialDataService.insertEssentialData(Excel.csvReadOperation(Constant.EssentialData12H_PATH,Constant.Type_12H),Constant.Type_12H);
+        essentialDataService.insertEssentialData(Excel.csvReadOperation(Constant.EssentialData11H_PATH,Constant.Type_11H),Constant.Type_11H);
+    }
+
     //插入18H的数据
     @RequestMapping(value = "/18H")
     public void addEssentialData18H() throws IOException {
