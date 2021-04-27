@@ -53,7 +53,7 @@ public class FaultDataService {
         //循环判断每类故障是否出现
         for (BeatsFault beatsFault : beatsFaultList) {
             faultId = beatsFault.getFaultId();
-
+            phenomenonNum = 0;
             for (PhenomenonData phenomenonData : phenomenonDataList) {
                 //若出现所需现象
                 if (phenomenonData.getPhenomenonId() == beatsFault.getNeedPhenomenonId()
@@ -80,6 +80,14 @@ public class FaultDataService {
 
     public List<FaultData> getFaultData() {
         return faultDataMapper.getFaultData();
+    }
+
+    public List<BeatsFault> getFaultRules() {
+        return faultDataMapper.getFaultRules();
+    }
+
+    public List<BeatsFaultName> getFault() {
+        return faultDataMapper.getFault();
     }
 
     public void deleteAll(){

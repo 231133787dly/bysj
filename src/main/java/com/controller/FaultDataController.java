@@ -1,5 +1,7 @@
 package com.controller;
 
+import com.pojo.BeatsFault;
+import com.pojo.BeatsFaultName;
 import com.pojo.FaultData;
 import com.pojo.PhenomenonData;
 import com.service.FaultDataService;
@@ -31,6 +33,21 @@ public class FaultDataController {
     public List<FaultData> getFaultData() {
         return faultDataService.getFaultData();
     }
+
+    //获得故障规则
+    @GetMapping(value = "/getFaultRules")
+    @ResponseBody
+    public List<BeatsFault> getFaultRules() {
+        return faultDataService.getFaultRules();
+    }
+
+    //获得故障名
+    @GetMapping(value = "/getFaultName")
+    @ResponseBody
+    public List<BeatsFaultName> getFault() {
+        return faultDataService.getFault();
+    }
+
 
     @RequestMapping(value = "/deleteAll")
     public void deleteAll(){

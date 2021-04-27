@@ -151,4 +151,8 @@ public class PhenomenonDataService {
     public List<PhenomenonData> getPhenomenonData() {
         return phenomenonDataMapper.getPhenomenonData();
     }
+
+    public List<BeatsPhenomenon> getPhenomenonRules() {
+        return phenomenonDataMapper.getPhenomenonRules();
+    }
 }

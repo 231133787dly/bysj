@@ -1,6 +1,7 @@
 package com.mapper;
 
 import com.constant.Constant;
+import com.pojo.BeatsPhenomenon;
 import com.pojo.EvidenceData;
 import com.pojo.PhenomenonData;
 import org.apache.ibatis.annotations.*;
@@ -39,5 +40,16 @@ public interface PhenomenonDataMapper {
             @Result(property="phenomenonThreshold",column="phenomenon_threshold",javaType=Integer.class)
     })
     public List<PhenomenonData> getPhenomenonData();
-}
 
+    //获取现象规则
+    @Select("select * from beats_phenomenon")
+    @Results({
+            @Result(id=true,property="phenomenonId",column="phenomenon_id",javaType=Integer.class),
+            @Result(property="phenomenonName",column="phenomenon_name",javaType=String.class),
+            @Result(property="beatsRateMax",column="beats_rate_max",javaType=Double.class),
+            @Result(property="beatsRateMin",column="beats_rate_min",javaType=Double.class),
+            @Result(property="lackTimeMax",column="lack_time_max",javaType=Double.class),
+            @Result(property="lackTimeMin",column="lack_time_min",javaType=Double.class)
+    })
+    public List<BeatsPhenomenon> getPhenomenonRules();
+}

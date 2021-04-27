@@ -2,6 +2,7 @@ package com.controller;
 
 
 import com.constant.Constant;
+import com.pojo.BeatsPhenomenon;
 import com.pojo.EssentialData11H;
 import com.pojo.PhenomenonData;
 import com.service.EvidenceDataService;
@@ -32,5 +33,12 @@ public class PhenomenonDataController {
     @ResponseBody
     public List<PhenomenonData> getPhenomenonData() {
         return phenomenonDataService.getPhenomenonData();
+    }
+
+    //获得现象规则
+    @GetMapping(value = "/getPhenomenonRules")
+    @ResponseBody
+    public List<BeatsPhenomenon> getPhenomenonRules() {
+        return phenomenonDataService.getPhenomenonRules();
     }
 }
