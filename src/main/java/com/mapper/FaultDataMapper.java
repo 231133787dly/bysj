@@ -39,7 +39,7 @@ public interface FaultDataMapper {
             @Result(property="faultId",column="fault_id",javaType=Integer.class),
             @Result(property="needPhenomenonId",column="need_phenomenon_id",javaType=Integer.class),
             @Result(property="needPhenomenonNum",column="need_phenomenon_num",javaType=Integer.class),
-            @Result(property="needPhenomenonThreshold",column="need_phenomenon_threshold",javaType=Integer.class),
+            @Result(property="needPhenomenonThreshold",column="need_phenomenon_threshold",javaType=Double.class),
     })
     public List<BeatsFault> getFaultRules();
 

@@ -14,7 +14,7 @@ public class BeatsFault {
 
     private int needPhenomenonNum;
 
-    private int needPhenomenonThreshold;
+    private double needPhenomenonThreshold;
 
     public int getId() {
         return id;
@@ -44,10 +44,10 @@ public class BeatsFault {
         this.needPhenomenonNum = needPhenomenonNum;
     }
 
-    public int getNeedPhenomenonThreshold() {
+    public double getNeedPhenomenonThreshold() {
         return needPhenomenonThreshold;
     }
-    public void setNeedPhenomenonThreshold(int needPhenomenonThreshold) {
+    public void setNeedPhenomenonThreshold(double needPhenomenonThreshold) {
         this.needPhenomenonThreshold = needPhenomenonThreshold;
     }
 

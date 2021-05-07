@@ -41,6 +41,9 @@ public final class Constant {
     /****** 规定的现象统计时间差 ******/
     public static final int DIFFERENCE_PHENOMENON_MINUTES = 60;
 
+    /****** 统计段内现象的最大条数 ******/
+    public static final int PHENOMENON_MAX_NUM = DIFFERENCE_PHENOMENON_MINUTES/DIFFERENCE_MINUTES;
+
     /****** 规定的故障统计时间差 ******/
     public static final int DIFFERENCE_FAULT_MINUTES = 120;
 

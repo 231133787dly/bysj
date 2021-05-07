@@ -24,7 +24,7 @@ public interface PhenomenonDataMapper {
             @Result(property="deviceSerial",column="device_serial",javaType=String.class),
             @Result(property="evidenceNum",column="evidence_num",javaType=Integer.class),
             @Result(property="evidenceFrom",column="evidence_from",javaType=String.class),
-            @Result(property="phenomenonThreshold",column="phenomenon_threshold",javaType=Integer.class)
+            @Result(property="phenomenonThreshold",column="phenomenon_threshold",javaType=Double.class)
     })
     public List<PhenomenonData> getPhenomenonDataByDAT(@Param("deviceSerial") String deviceSerial, @Param("startTime") String startTime, @Param("endTime") String endTime);
 
@@ -37,7 +37,7 @@ public interface PhenomenonDataMapper {
             @Result(property="deviceSerial",column="device_serial",javaType=String.class),
             @Result(property="evidenceNum",column="evidence_num",javaType=Integer.class),
             @Result(property="evidenceFrom",column="evidence_from",javaType=String.class),
-            @Result(property="phenomenonThreshold",column="phenomenon_threshold",javaType=Integer.class)
+            @Result(property="phenomenonThreshold",column="phenomenon_threshold",javaType=Double.class)
     })
     public List<PhenomenonData> getPhenomenonData();
 

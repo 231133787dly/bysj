@@ -18,7 +18,7 @@ public class PhenomenonData {
 
     private String evidenceFrom;
 
-    private int phenomenonThreshold;
+    private double phenomenonThreshold;
 
     public int getId() {
         return id;
@@ -62,10 +62,10 @@ public class PhenomenonData {
         this.evidenceFrom = evidenceFrom;
     }
 
-    public int getPhenomenonThreshold() {
+    public double getPhenomenonThreshold() {
         return phenomenonThreshold;
     }
-    public void setPhenomenonThreshold(int phenomenonThreshold) {
+    public void setPhenomenonThreshold(double phenomenonThreshold) {
         this.phenomenonThreshold = phenomenonThreshold;
     }
 }

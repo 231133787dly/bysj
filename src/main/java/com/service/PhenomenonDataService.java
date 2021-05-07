@@ -82,7 +82,7 @@ public class PhenomenonDataService {
         for (BeatsPhenomenon beatsPhenomenon : beatsPhenomenaList){
             phenomenonId = beatsPhenomenon.getPhenomenonId();
             //当前时间段内同一类现象出现的阈值
-            int threshold = 0;
+            double threshold = 0;
             if (evidenceDataList != null){
                 for(EvidenceData evidenceData : evidenceDataList){
                     beatsRate = evidenceData.getBeatsRate();
@@ -93,6 +93,7 @@ public class PhenomenonDataService {
                     }
                 }
             }
+            threshold = threshold / Constant.PHENOMENON_MAX_NUM;
             //如果出现现象
             if (threshold != 0){
                 phenomenonData.setPhenomenonId(phenomenonId);
